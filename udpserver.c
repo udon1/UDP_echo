@@ -101,8 +101,8 @@ struct echo_msg {
 
 int main (int argc, char *argv[]) {
 	in_port_t myport;
-	struct addrinfo hints, *res0;
-	int soc, opt, errcode;
+	//struct addrinfo hints, *res0;
+	int soc;//, opt, errcode;
 	socklen_t opt_len;
 	struct sockaddr_in myskt;
 	socklen_t fromlen;

@@ -87,14 +87,14 @@ int main (int argc, char *argv[]) {
 	/*変数宣言*/
 	struct echo_msg em;
 	// struct timeval timeout;
-	struct sockaddr_storage from, to;
-	int end, width;
-	ssize_t len;
-	socklen_t fromlen, tolen;
-	int seq;
-	char rbuf[BUF];
-	char sbuf[BUF];
-	struct sockaddr_in myskt;
+	//struct sockaddr_storage from;//, to;
+	//int end, width;
+	//ssize_t len;
+	socklen_t tolen;//fromlen, tolen;
+	//int seq;
+	//char rbuf[BUF];
+	//char sbuf[BUF];
+	//struct sockaddr_in myskt;
 	struct sockaddr_in skt;
 	int soc;
 	in_port_t port;
