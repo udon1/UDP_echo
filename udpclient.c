@@ -118,8 +118,8 @@ int main (int argc, char *argv[]) {
 		return (EX_UNAVAILABLE);
 	}
 	
-	bzero(&skt, sizeof(skt));
-	skt.sin_family = AF_INET;
+	memset(&skt, 0, sizeof(skt));
+	skt.sin_family = PF_INET;
 	skt.sin_port = htons(port);
 	skt.sin_addr.s_addr = htonl(ipaddr.s_addr);
 
