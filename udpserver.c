@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <unistd.h>
+#include <sysexits.h>
 
 #define BUF 512
 
@@ -60,13 +62,13 @@ int udp_server_socket(in_port_t myport) {
 
 void send_recv(in_port_t myport)
 {
-	struct sockaddr_storage from;
-	ssize_t len;
+	//struct sockaddr_storage from;
+	//ssize_t len;
 	socklen_t fromlen;
 	int s;
-	char rbuf[BUF];
-	char sbuf[BUF];
-	struct sockaddr_in myskt;
+	//char rbuf[BUF];
+	//char sbuf[BUF];
+	//struct sockaddr_in myskt;
 	struct sockaddr_in skt;
 	struct echo_msg msg;
 
