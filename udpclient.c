@@ -14,8 +14,8 @@
 #define BUF 512
 
 struct echo_msg {
-	unsigned int seq;
-	unsigned int reserve;
+	unsigned short seq;
+	unsigned short reserve;
 	char msg[32];
 };
 
@@ -106,11 +106,8 @@ int main (int argc, char *argv[]) {
 	}
 	
 	inet_aton(argv[1], &ipaddr);	
-	port = inet_addr(argv[2]);
+	port = atoi(argv[2]);
 	em.seq = 0;
-	printf("input: ");
-	// scanf("%s", em.msg);
-	fgets(em.msg, sizeof(em.msg), stdin);
 
 	/*ソケット生成*/
 	if((soc = socket(PF_INET, SOCK_DGRAM, 0)) == -1) {
@@ -123,22 +120,35 @@ int main (int argc, char *argv[]) {
 	skt.sin_port = htons(port);
 	skt.sin_addr.s_addr = htonl(ipaddr.s_addr);
 
+	printf("port: %hu\n", port);
+	printf("ipaddr: %u\n", ipaddr);
+	printf("htonl(ipaddr.s_addr): %u\n", htonl(ipaddr.s_addr));
+	printf("ipaddr.s_addr: %u\n", ipaddr.s_addr);
 	tolen = sizeof(skt);
-	printf("seq: %d, msg: %s\n", em.seq, em.msg);
+
+	printf("tolen: %u\n", tolen);
+	printf("sizeof(tolen): %lu\n", sizeof(tolen));
 	/*送信*/
 	while(em.seq < 10) {
+		printf("ループ突入\n");
 		printf("input: ");
-		scanf("%s", em.msg);
+		fgets(em.msg, sizeof(em.msg), stdin);
+		printf("fgetした\n");
+		printf("seq: %d, msg: %s", em.seq, em.msg);
+		printf("em.msg: %s", em.msg);
 		if((sendto(soc, &em, sizeof(em), 0, 
 						(struct sockaddr *)&skt, tolen)) == -1) {
 			perror("sendto");
 			return (-1);
 		}
+		printf("sendtoした\n");
 	/*受信*/
 		if((recvfrom(soc, &em, sizeof(em), 0,
 						(struct sockaddr *)&skt, &tolen)) == -1) {
 			perror("recvfrom");
 			return (-1);
+		} else {
+			printf("recvした");
 		}
 		printf("seq: %d, msg: %s\n", em.seq, em.msg);
 		// if (seq >= 10) {
